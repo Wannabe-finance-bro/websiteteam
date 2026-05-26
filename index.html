@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRAV — The Burger</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Modak&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            beige: '#f5e3cd',
+            cred: '#f91814',
+            mustard: '#ffd750',
+            'mustard-dark': '#f4a804',
+            cblack: '#1b1b1b',
+          },
+          fontFamily: {
+            mouse: ['"Mouse Memoirs"', 'sans-serif'],
+            modak: ['"Modak"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: #f5e3cd; }
+    body {
+      background: #f5e3cd;
+      color: #1b1b1b;
+      font-family: "Mouse Memoirs", sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Modak giant text ─── */
+    .giant { font-family: "Modak", sans-serif; color: #f91814; line-height: 0.82; letter-spacing: -0.01em; }
+
+    /* ─── Wave SVG dividers ─── */
+    .wave-into-red { display: block; }
+    .wave-out-red  { display: block; transform: rotate(180deg); }
+
+    /* ─── Photo card ─── */
+    .photo-card { border-radius: 8px; overflow: hidden; box-shadow: 4px 6px 0 rgba(0,0,0,0.18); }
+
+    /* ─── Floating animations ─── */
+    @keyframes float-a { 0%,100%{transform:translateY(0) rotate(-8deg)} 50%{transform:translateY(-12px) rotate(-8deg)} }
+    @keyframes float-b { 0%,100%{transform:translateY(0) rotate(6deg)}  50%{transform:translateY(-16px) rotate(6deg)}  }
+    @keyframes float-c { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-8px)  rotate(-4deg)} }
+    @keyframes float-d { 0%,100%{transform:translateY(0) rotate(12deg)} 50%{transform:translateY(-10px) rotate(12deg)} }
+    .fa { animation: float-a 3.8s ease-in-out infinite; }
+    .fb { animation: float-b 4.2s ease-in-out infinite; }
+    .fc { animation: float-c 3.2s ease-in-out infinite; }
+    .fd { animation: float-d 4.8s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav style="background:#f5e3cd; position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:14px 40px; border-bottom:1px solid rgba(0,0,0,0.07);">
+  <span style="font-family:'Modak',sans-serif; font-size:26px; color:#1b1b1b; letter-spacing:0.05em;">CRAV</span>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <button style="background:#f91814; color:white; font-family:'Mouse Memoirs',sans-serif; font-size:14px; letter-spacing:0.2em; text-transform:uppercase; padding:9px 24px; border-radius:999px; border:none; cursor:pointer;">
+      ORDER
+    </button>
+    <div style="display:flex; flex-direction:column; gap:5px; cursor:pointer;">
+      <span style="display:block; width:24px; height:2px; background:#1b1b1b;"></span>
+      <span style="display:block; width:24px; height:2px; background:#1b1b1b;"></span>
+      <span style="display:block; width:16px; height:2px; background:#1b1b1b;"></span>
+    </div>
+    <span style="font-family:'Mouse Memoirs',sans-serif; font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#1b1b1b;">MENU</span>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section style="background:#f5e3cd; position:relative; overflow:hidden; padding:0 0 60px;">
+
+  <!-- SMASHED FRESH / BOLD FLAVOR top labels -->
+  <div style="display:flex; justify-content:space-between; padding:20px 40px 0; position:relative; z-index:5;">
+    <span style="font-family:'Mouse Memoirs',sans-serif; font-size:clamp(13px,1.8vw,20px); color:#f91814; letter-spacing:0.12em; text-transform:uppercase;">SMASHED FRESH</span>
+    <span style="font-family:'Mouse Memoirs',sans-serif; font-size:clamp(13px,1.8vw,20px); color:#f91814; letter-spacing:0.12em; text-transform:uppercase;">BOLD FLAVOR</span>
+  </div>
+
+  <!-- Giant THE -->
+  <div class="giant" style="text-align:center; font-size:clamp(100px,20vw,260px); padding:0 20px; position:relative; z-index:2; margin-top:-10px;">THE</div>
+
+  <!-- BURGER + floating image -->
+  <div style="position:relative; text-align:center; z-index:2; margin-top:-20px; overflow:visible; padding-bottom:clamp(80px,12vw,160px);">
+    <!-- BURGER text -->
+    <div class="giant" style="font-size:clamp(100px,20vw,260px); padding:0 20px; position:relative; z-index:1;">BURGER</div>
+
+    <!-- Burger photo overlapping the text -->
+    <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-58%); z-index:10; width:min(52vw,560px); pointer-events:none;">
+      <svg viewBox="0 0 580 460" xmlns="http://www.w3.org/2000/svg" style="width:100%; filter:drop-shadow(0 12px 40px rgba(0,0,0,0.3)); display:block;">
+        <!-- Bun top -->
+        <ellipse cx="290" cy="120" rx="210" ry="100" fill="#C9802A"/>
+        <ellipse cx="290" cy="100" rx="200" ry="88" fill="#E8A040"/>
+        <ellipse cx="290" cy="90" rx="195" ry="82" fill="#D4913A"/>
+        <!-- sesame seeds -->
+        <ellipse cx="230" cy="72" rx="12" ry="6" fill="#C47A25" transform="rotate(-20 230 72)"/>
+        <ellipse cx="300" cy="58" rx="12" ry="6" fill="#C47A25" transform="rotate(5 300 58)"/>
+        <ellipse cx="360" cy="70" rx="12" ry="6" fill="#C47A25" transform="rotate(15 360 70)"/>
+        <!-- Cheese drip -->
+        <path d="M100 200 Q90 230 95 260 L120 260 L120 210 Z" fill="#FFD750"/>
+        <path d="M460 205 Q475 235 470 265 L450 265 L450 215 Z" fill="#FFD750"/>
+        <rect x="95" y="190" width="390" height="20" fill="#FFD750"/>
+        <!-- Patty stack -->
+        <rect x="90" y="210" width="400" height="35" rx="6" fill="#3A1A08"/>
+        <rect x="90" y="208" width="400" height="8" rx="4" fill="#5A2A12"/>
+        <rect x="88" y="248" width="404" height="35" rx="6" fill="#3D1B09"/>
+        <!-- Lettuce -->
+        <path d="M70 290 Q150 260 290 275 Q430 260 510 290 Q430 310 290 298 Q150 310 70 290Z" fill="#5C8C3A"/>
+        <path d="M80 292 Q160 278 290 285" stroke="#4a7a2a" stroke-width="2" fill="none"/>
+        <!-- Tomato slices -->
+        <ellipse cx="185" cy="305" rx="55" ry="18" fill="#E53010"/>
+        <ellipse cx="375" cy="305" rx="55" ry="18" fill="#E53010"/>
+        <!-- Bottom bun -->
+        <ellipse cx="290" cy="340" rx="220" ry="30" fill="#C9802A"/>
+        <ellipse cx="290" cy="355" rx="215" ry="25" fill="#E8A040"/>
+        <ellipse cx="290" cy="370" rx="205" ry="20" fill="#C9802A"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- CRAV below burger — needs clear space above -->
+  <div class="giant" style="text-align:center; font-size:clamp(60px,12vw,160px); position:relative; z-index:2; margin-top:clamp(60px,10vw,130px);">CRAV</div>
+
+  <!-- Side descriptions + cookie banner row -->
+  <div style="position:relative; display:flex; align-items:flex-start; justify-content:space-between; padding:20px 40px 0; gap:20px; z-index:5; margin-top:10px;">
+    <!-- Left description -->
+    <div style="max-width:190px; flex-shrink:0; font-family:'Mouse Memoirs',sans-serif; font-size:13px; line-height:1.6; color:#1b1b1b;">
+      Smashed hot on the flat top, our prime patties lock in ultimate juiciness under a caramelized crust.
+    </div>
+
+    <!-- Cookie consent banner — center -->
+    <div style="background:white; border-radius:12px; padding:14px 18px; box-shadow:0 6px 24px rgba(0,0,0,0.12); max-width:240px; width:100%; flex-shrink:0;">
+      <p style="font-family:system-ui,sans-serif; font-size:11px; color:#555; margin-bottom:10px; line-height:1.45;">
+        We use cookies to improve your experience.
+      </p>
+      <div style="display:flex; gap:8px; justify-content:flex-end;">
+        <button style="font-size:11px; padding:5px 14px; border:1px solid #ddd; border-radius:5px; background:white; cursor:pointer; font-family:system-ui,sans-serif; color:#555;">Decline</button>
+        <button style="font-size:11px; padding:5px 14px; border:none; border-radius:5px; background:#1b1b1b; color:white; cursor:pointer; font-family:system-ui,sans-serif;">OK</button>
+      </div>
+    </div>
+
+    <!-- Right description -->
+    <div style="max-width:190px; flex-shrink:0; font-family:'Mouse Memoirs',sans-serif; font-size:13px; line-height:1.6; color:#1b1b1b; text-align:right;">
+      Topped with melted cheddar and our signature chili honey glaze crafted to satisfy your cravings since 1991.
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     TOP CLASSIC — JUICY CHEESY FULLY LOADED
+══════════════════════════════════ -->
+<section style="background:#f5e3cd; padding:80px 40px 90px;">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    <!-- Label -->
+    <p style="text-align:center; font-family:'Mouse Memoirs',sans-serif; font-size:18px; letter-spacing:0.15em; color:#f91814; text-transform:uppercase; margin-bottom:10px; font-style:italic; text-decoration:underline; text-decoration-color:#f91814; text-underline-offset:4px;">
+      TOP CLASSIC
+    </p>
+
+    <!-- Heading -->
+    <h2 class="giant" style="text-align:center; font-size:clamp(60px,11vw,148px); margin-bottom:22px;">
+      JUICY CHEESY<br>FULLY LOADED
+    </h2>
+
+    <!-- Description -->
+    <p style="text-align:center; font-family:'Mouse Memoirs',sans-serif; font-size:15px; color:#1b1b1b; max-width:480px; margin:0 auto 28px; line-height:1.55; letter-spacing:0.02em;">
+      CRAV is back and bolder than ever. Honoring our rich roots, we bring you the ultimate smashed experience fully loaded, hot and crafted fresh.
+    </p>
+
+    <!-- CTA -->
+    <div style="text-align:center; margin-bottom:64px;">
+      <button style="background:#f91814; color:white; font-family:'Mouse Memoirs',sans-serif; font-size:15px; letter-spacing:0.2em; text-transform:uppercase; padding:13px 38px; border-radius:999px; border:none; cursor:pointer; box-shadow:0 5px 0 #a00e0a;">
+        ORDER NOW
+      </button>
+    </div>
+
+    <!-- Photo collage -->
+    <div style="display:flex; gap:20px; align-items:flex-end; justify-content:center; flex-wrap:wrap;">
+
+      <!-- Left tall photo — tilted left -->
+      <div class="photo-card" style="flex:0 0 auto; width:clamp(140px,22vw,270px); height:clamp(180px,28vw,340px); transform:rotate(-4deg); transform-origin:bottom center;">
+        <svg viewBox="0 0 270 340" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block; background:#2a1a08;">
+          <rect width="270" height="340" fill="#1a0e05"/>
+          <ellipse cx="135" cy="260" rx="110" ry="30" fill="#3a2010" opacity="0.8"/>
+          <rect x="60" y="200" width="8" height="60" rx="3" fill="#e8a030"/>
+          <rect x="72" y="195" width="8" height="65" rx="3" fill="#f4b840" transform="rotate(5 76 227)"/>
+          <rect x="85" y="198" width="8" height="62" rx="3" fill="#e8a030"/>
+          <rect x="98" y="202" width="8" height="58" rx="3" fill="#f4b840" transform="rotate(-3 102 231)"/>
+          <rect x="112" y="195" width="8" height="65" rx="3" fill="#e8a030"/>
+          <ellipse cx="135" cy="155" rx="75" ry="40" fill="#c97a22"/>
+          <ellipse cx="135" cy="145" rx="72" ry="36" fill="#e89030"/>
+          <ellipse cx="135" cy="140" rx="70" ry="33" fill="#d48030"/>
+          <rect x="65" y="185" width="140" height="22" rx="4" fill="#3a1a08"/>
+          <rect x="62" y="178" width="146" height="12" rx="3" fill="#ffd750" opacity="0.9"/>
+          <ellipse cx="135" cy="205" rx="76" ry="18" fill="#e89030"/>
+          <text x="135" y="310" text-anchor="middle" font-family="system-ui" font-size="14" fill="#f5e3cd" opacity="0.7">Burger &amp; Fries</text>
+        </svg>
+      </div>
+
+      <!-- Center wide photo — slightly tilted right -->
+      <div class="photo-card" style="flex:0 0 auto; width:clamp(180px,30vw,360px); height:clamp(150px,22vw,270px); transform:rotate(1.5deg);">
+        <svg viewBox="0 0 360 270" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block; background:#1a0e05;">
+          <rect width="360" height="270" fill="#1a0e05"/>
+          <ellipse cx="80" cy="200" rx="40" ry="25" fill="#c8956a" transform="rotate(-20 80 200)"/>
+          <ellipse cx="100" cy="210" rx="40" ry="25" fill="#c8956a"/>
+          <ellipse cx="280" cy="200" rx="40" ry="25" fill="#c8956a" transform="rotate(20 280 200)"/>
+          <ellipse cx="260" cy="210" rx="40" ry="25" fill="#c8956a"/>
+          <ellipse cx="180" cy="90" rx="110" ry="55" fill="#c97a22"/>
+          <ellipse cx="180" cy="78" rx="105" ry="50" fill="#e8a040"/>
+          <ellipse cx="180" cy="70" rx="100" ry="44" fill="#d49030"/>
+          <ellipse cx="140" cy="55" rx="8" ry="4" fill="#c47a20" transform="rotate(-15 140 55)"/>
+          <ellipse cx="180" cy="45" rx="8" ry="4" fill="#c47a20"/>
+          <ellipse cx="218" cy="55" rx="8" ry="4" fill="#c47a20" transform="rotate(15 218 55)"/>
+          <path d="M70 140 L290 140 L285 160 L75 160 Z" fill="#ffd750"/>
+          <path d="M70 140 L60 165 L80 165 Z" fill="#ffd750"/>
+          <path d="M290 140 L300 165 L280 165 Z" fill="#ffd750"/>
+          <rect x="68" y="160" width="224" height="28" rx="6" fill="#3a1a08"/>
+          <rect x="68" y="158" width="224" height="8" rx="4" fill="#5a2a12"/>
+          <path d="M58 192 Q100 178 180 185 Q260 178 302 192 Q260 208 180 200 Q100 208 58 192Z" fill="#5a8c38"/>
+          <rect x="65" y="205" width="230" height="25" rx="6" fill="#3d1b09"/>
+          <ellipse cx="180" cy="235" rx="115" ry="20" fill="#c97a22"/>
+          <ellipse cx="180" cy="248" rx="110" ry="16" fill="#e8a040"/>
+        </svg>
+      </div>
+
+      <!-- Right portrait — tilted right -->
+      <div class="photo-card" style="flex:0 0 auto; width:clamp(130px,20vw,245px); height:clamp(170px,26vw,310px); transform:rotate(3deg); transform-origin:bottom center;">
+        <svg viewBox="0 0 245 310" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block; background:#1a0e05;">
+          <rect width="245" height="310" fill="#1a0e05"/>
+          <ellipse cx="122" cy="280" rx="65" ry="35" fill="#b88058"/>
+          <ellipse cx="165" cy="260" rx="20" ry="12" fill="#c8956a" transform="rotate(30 165 260)"/>
+          <ellipse cx="75" cy="258" rx="18" ry="10" fill="#c8956a" transform="rotate(-20 75 258)"/>
+          <ellipse cx="122" cy="110" rx="88" ry="48" fill="#c97a22"/>
+          <ellipse cx="122" cy="98" rx="84" ry="44" fill="#e8a040"/>
+          <ellipse cx="122" cy="90" rx="80" ry="39" fill="#d49030"/>
+          <path d="M38 152 L207 152 L200 170 L45 170 Z" fill="#ffd750"/>
+          <path d="M38 152 L30 172 L48 172 Z" fill="#ffd750"/>
+          <path d="M207 152 L215 172 L198 172 Z" fill="#ffd750"/>
+          <rect x="35" y="170" width="175" height="24" rx="5" fill="#3a1a08"/>
+          <rect x="35" y="168" width="175" height="7" rx="3" fill="#5a2a12"/>
+          <rect x="33" y="197" width="179" height="22" rx="5" fill="#3d1b09"/>
+          <path d="M28 222 Q80 210 122 218 Q164 210 217 222 Q164 238 122 230 Q80 238 28 222Z" fill="#5a8c38"/>
+          <ellipse cx="90" cy="243" rx="38" ry="14" fill="#e53010"/>
+          <ellipse cx="155" cy="243" rx="38" ry="14" fill="#e53010"/>
+          <ellipse cx="122" cy="258" rx="92" ry="17" fill="#c97a22"/>
+          <ellipse cx="122" cy="268" rx="88" ry="14" fill="#e8a040"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     FOOD THAT FEELS GOOD
+══════════════════════════════════ -->
+<section style="background:#f91814; position:relative; padding:80px 40px 90px; overflow:visible;">
+
+  <div style="position:absolute; top:-1px; left:0; right:0; height:90px; overflow:hidden; z-index:2; pointer-events:none;">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="width:100%; height:90px; display:block;">
+      <path d="M0,0 C120,90 280,0 440,50 C600,90 720,10 900,55 C1050,85 1180,5 1320,40 C1380,55 1420,20 1440,30 L1440,0 Z" fill="#f5e3cd"/>
+    </svg>
+  </div>
+
+  <div style="position:absolute; bottom:-1px; left:0; right:0; height:90px; overflow:hidden; z-index:2; pointer-events:none;">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="width:100%; height:90px; display:block; transform:rotate(180deg);">
+      <path d="M0,0 C120,90 280,0 440,50 C600,90 720,10 900,55 C1050,85 1180,5 1320,40 C1380,55 1420,20 1440,30 L1440,0 Z" fill="#f5e3cd"/>
+    </svg>
+  </div>
+
+  <div style="position:absolute; left:20px; top:25%; opacity:0.55; z-index:1;">
+    <svg width="55" height="80" viewBox="0 0 55 80"><path d="M27 5 C45 5 52 20 50 38 C48 56 40 75 27 75 C14 75 4 56 5 38 C6 20 9 5 27 5Z" fill="#c0c0c0"/></svg>
+  </div>
+  <div style="position:absolute; left:15px; bottom:22%; opacity:0.55; z-index:1;">
+    <svg width="48" height="70" viewBox="0 0 48 70"><path d="M24 4 C39 4 46 18 44 34 C42 50 35 66 24 66 C13 66 4 50 4 34 C4 18 9 4 24 4Z" fill="#c0c0c0"/></svg>
+  </div>
+  <div style="position:absolute; right:20px; top:28%; opacity:0.55; z-index:1;">
+    <svg width="55" height="80" viewBox="0 0 55 80"><path d="M27 5 C45 5 52 20 50 38 C48 56 40 75 27 75 C14 75 4 56 5 38 C6 20 9 5 27 5Z" fill="#c0c0c0" transform="rotate(15 27 40)"/></svg>
+  </div>
+  <div style="position:absolute; right:18px; bottom:20%; opacity:0.55; z-index:1;">
+    <svg width="48" height="70" viewBox="0 0 48 70"><path d="M24 4 C39 4 46 18 44 34 C42 50 35 66 24 66 C13 66 4 50 4 34 C4 18 9 4 24 4Z" fill="#c0c0c0" transform="rotate(-12 24 35)"/></svg>
+  </div>
+
+  <div style="max-width:960px; margin:0 auto; text-align:center; position:relative; z-index:3; overflow:visible;">
+
+    <div style="margin-bottom:14px;">
+      <span style="font-family:'Mouse Memoirs',sans-serif; font-size:13px; letter-spacing:0.22em; color:white; text-transform:uppercase; border:2px solid rgba(255,255,255,0.6); padding:4px 14px; border-radius:4px;">
+        EXPERIENCE
+      </span>
+    </div>
+
+    <h2 style="font-family:'Modak',sans-serif; font-size:clamp(64px,12vw,156px); line-height:0.86; color:white; letter-spacing:-0.01em; margin-bottom:56px;">
+      FOOD THAT<br>FEELS GOOD
+    </h2>
+
+    <div style="position:relative; width:min(68vw,520px); margin:0 auto 56px; overflow:visible;">
+
+      <div style="position:absolute; left:-90px; top:30%; z-index:5; transform:rotate(-18deg);">
+        <svg width="110" height="110" viewBox="0 0 130 130">
+          <rect x="38" y="95" width="54" height="20" rx="4" fill="white" stroke="#1b1b1b" stroke-width="3"/>
+          <ellipse cx="65" cy="82" rx="36" ry="28" fill="white" stroke="#1b1b1b" stroke-width="3.5"/>
+          <rect x="32" y="42" width="18" height="42" rx="9" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(-12 41 63)"/>
+          <rect x="52" y="34" width="18" height="48" rx="9" fill="white" stroke="#1b1b1b" stroke-width="3"/>
+          <rect x="72" y="36" width="18" height="46" rx="9" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(8 81 59)"/>
+          <rect x="90" y="44" width="16" height="38" rx="8" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(18 98 63)"/>
+          <rect x="16" y="60" width="16" height="34" rx="8" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(-40 24 77)"/>
+          <circle cx="43" cy="78" r="3.5" fill="#ddd"/>
+          <circle cx="62" cy="74" r="3.5" fill="#ddd"/>
+          <circle cx="80" cy="76" r="3.5" fill="#ddd"/>
+          <circle cx="96" cy="82" r="3.5" fill="#ddd"/>
+        </svg>
+      </div>
+
+      <div style="position:absolute; right:-90px; top:30%; z-index:5; transform:rotate(18deg) scaleX(-1);">
+        <svg width="110" height="110" viewBox="0 0 130 130">
+          <rect x="38" y="95" width="54" height="20" rx="4" fill="white" stroke="#1b1b1b" stroke-width="3"/>
+          <ellipse cx="65" cy="82" rx="36" ry="28" fill="white" stroke="#1b1b1b" stroke-width="3.5"/>
+          <rect x="32" y="42" width="18" height="42" rx="9" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(-12 41 63)"/>
+          <rect x="52" y="34" width="18" height="48" rx="9" fill="white" stroke="#1b1b1b" stroke-width="3"/>
+          <rect x="72" y="36" width="18" height="46" rx="9" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(8 81 59)"/>
+          <rect x="90" y="44" width="16" height="38" rx="8" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(18 98 63)"/>
+          <rect x="16" y="60" width="16" height="34" rx="8" fill="white" stroke="#1b1b1b" stroke-width="3" transform="rotate(-40 24 77)"/>
+          <circle cx="43" cy="78" r="3.5" fill="#ddd"/>
+          <circle cx="62" cy="74" r="3.5" fill="#ddd"/>
+          <circle cx="80" cy="76" r="3.5" fill="#ddd"/>
+          <circle cx="96" cy="82" r="3.5" fill="#ddd"/>
+        </svg>
+      </div>
+
+      <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block; filter:drop-shadow(0 10px 30px rgba(0,0,0,0.3)); position:relative; z-index:3;">
+        <ellipse cx="260" cy="110" rx="200" ry="90" fill="#c97a22"/>
+        <ellipse cx="260" cy="96" rx="192" ry="82" fill="#e8a040"/>
+        <ellipse cx="260" cy="85" rx="186" ry="75" fill="#d49030"/>
+        <ellipse cx="195" cy="60" rx="15" ry="7" fill="#b86820" transform="rotate(-20 195 60)"/>
+        <ellipse cx="260" cy="42" rx="15" ry="7" fill="#b86820"/>
+        <ellipse cx="325" cy="60" rx="15" ry="7" fill="#b86820" transform="rotate(20 325 60)"/>
+        <ellipse cx="220" cy="80" rx="12" ry="6" fill="#b86820" transform="rotate(-10 220 80)"/>
+        <ellipse cx="300" cy="80" rx="12" ry="6" fill="#b86820" transform="rotate(10 300 80)"/>
+        <circle cx="220" cy="100" r="24" fill="white" stroke="#1b1b1b" stroke-width="3"/>
+        <circle cx="224" cy="102" r="13" fill="#1b1b1b"/>
+        <circle cx="219" cy="97" r="5" fill="white"/>
+        <circle cx="300" cy="100" r="24" fill="white" stroke="#1b1b1b" stroke-width="3"/>
+        <circle cx="304" cy="102" r="13" fill="#1b1b1b"/>
+        <circle cx="299" cy="97" r="5" fill="white"/>
+        <path d="M58 190 L462 190 L455 215 L65 215 Z" fill="#ffd750"/>
+        <path d="M58 190 L44 218 L68 218 Z" fill="#ffd750"/>
+        <path d="M462 190 L476 218 L452 218 Z" fill="#ffd750"/>
+        <rect x="55" y="212" width="410" height="38" rx="8" fill="#3a1a08"/>
+        <rect x="55" y="210" width="410" height="10" rx="5" fill="#5a2a12"/>
+        <path d="M42 255 Q120 235 260 248 Q400 235 478 255 Q400 278 260 265 Q120 278 42 255Z" fill="#5a8c38"/>
+        <ellipse cx="160" cy="278" rx="68" ry="22" fill="#e53010"/>
+        <line x1="120" y1="265" x2="200" y2="290" stroke="#b82808" stroke-width="2" opacity="0.5"/>
+        <ellipse cx="360" cy="278" rx="68" ry="22" fill="#e53010"/>
+        <line x1="320" y1="265" x2="400" y2="290" stroke="#b82808" stroke-width="2" opacity="0.5"/>
+        <rect x="52" y="295" width="416" height="36" rx="8" fill="#3d1b09"/>
+        <ellipse cx="260" cy="338" rx="215" ry="28" fill="#c97a22"/>
+        <ellipse cx="260" cy="352" rx="208" ry="22" fill="#e8a040"/>
+        <ellipse cx="260" cy="363" rx="198" ry="17" fill="#c97a22"/>
+      </svg>
+
+      <div style="position:absolute; right:-14px; bottom:18%; z-index:6; transform:rotate(8deg);">
+        <div style="background:#ffd750; border-radius:50%; width:clamp(70px,10vw,108px); height:clamp(70px,10vw,108px); display:flex; align-items:center; justify-content:center; border:3.5px solid #1b1b1b; box-shadow:3px 3px 0 #1b1b1b;">
+          <span style="font-family:'Mouse Memoirs',sans-serif; font-size:clamp(10px,1.5vw,14px); text-align:center; line-height:1.2; color:#1b1b1b;">BOLD<br>FLAVOR</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; max-width:700px; margin:0 auto;">
+      <p style="font-family:'Mouse Memoirs',sans-serif; font-size:clamp(10px,1.4vw,14px); color:rgba(255,255,255,0.9); line-height:1.8; letter-spacing:0.06em; text-align:left;">
+        450 KCAL<br>HIGH PROTEIN<br>FRESH INGREDIENTS
+      </p>
+      <p style="font-family:'Mouse Memoirs',sans-serif; font-size:clamp(10px,1.4vw,14px); color:rgba(255,255,255,0.9); line-height:1.8; letter-spacing:0.06em; text-align:right;">
+        100% ORGANIC<br>ZERO GUILT<br>TRUE TASTE
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     FULL-WIDTH BURGER PHOTO
+══════════════════════════════════ -->
+<section style="overflow:hidden; max-height:65vh; position:relative;">
+  <svg viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-height:65vh; display:block; object-fit:cover;">
+    <rect width="1440" height="800" fill="#1a0a04"/>
+    <radialGradient id="ambientLight" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#3a1a08" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0a0402" stop-opacity="1"/>
+    </radialGradient>
+    <rect width="1440" height="800" fill="url(#ambientLight)"/>
+    <path d="M200 800 C250 720 320 700 400 690 C450 685 500 680 540 690 L560 800Z" fill="#b88058"/>
+    <path d="M1240 800 C1190 720 1120 700 1040 690 C990 685 940 680 900 690 L880 800Z" fill="#b88058"/>
+    <ellipse cx="400" cy="730" rx="180" ry="80" fill="#b88058"/>
+    <ellipse cx="1040" cy="730" rx="180" ry="80" fill="#b88058"/>
+    <ellipse cx="720" cy="680" rx="380" ry="50" fill="#c97a22"/>
+    <ellipse cx="720" cy="695" rx="370" ry="42" fill="#e8a040"/>
+    <rect x="345" y="600" width="750" height="65" rx="10" fill="#3d1b09"/>
+    <path d="M300 600 Q500 570 720 585 Q940 570 1140 600 Q940 628 720 612 Q500 628 300 600Z" fill="#4a7a28"/>
+    <ellipse cx="550" cy="575" rx="110" ry="30" fill="#e53010"/>
+    <ellipse cx="890" cy="575" rx="110" ry="30" fill="#e53010"/>
+    <rect x="348" y="510" width="744" height="58" rx="10" fill="#3a1a08"/>
+    <rect x="348" y="508" width="744" height="14" rx="7" fill="#5a2a12"/>
+    <path d="M345 505 L1095 505 L1082 535 L358 535Z" fill="#ffd750"/>
+    <path d="M345 505 L320 538 L350 538Z" fill="#ffd750"/>
+    <path d="M1095 505 L1120 538 L1090 538Z" fill="#ffd750"/>
+    <ellipse cx="720" cy="400" rx="350" ry="130" fill="#c97a22"/>
+    <ellipse cx="720" cy="375" rx="338" ry="120" fill="#e8a040"/>
+    <ellipse cx="720" cy="355" rx="326" ry="108" fill="#d49030"/>
+    <ellipse cx="570" cy="300" rx="22" ry="9" fill="#b86820" transform="rotate(-15 570 300)"/>
+    <ellipse cx="660" cy="268" rx="22" ry="9" fill="#b86820"/>
+    <ellipse cx="760" cy="260" rx="22" ry="9" fill="#b86820" transform="rotate(5 760 260)"/>
+    <ellipse cx="858" cy="272" rx="22" ry="9" fill="#b86820" transform="rotate(15 858 272)"/>
+    <ellipse cx="930" cy="305" rx="20" ry="8" fill="#b86820" transform="rotate(20 930 305)"/>
+    <path d="M370 490 Q360 510 365 530 L385 530 L382 495 Z" fill="#ffd750" opacity="0.8"/>
+    <path d="M1070 490 Q1080 510 1075 530 L1055 530 L1058 495 Z" fill="#ffd750" opacity="0.8"/>
+    <ellipse cx="1070" cy="712" rx="20" ry="8" fill="#d4a830" stroke="#b89020" stroke-width="2"/>
+    <rect x="0" y="750" width="1440" height="50" fill="rgba(0,0,0,0.3)"/>
+  </svg>
+</section>
+
+
+<!-- ══════════════════════════════════
+     PURE QUALITY — floating ingredients
+══════════════════════════════════ -->
+<section style="background:#f5e3cd; padding:80px 40px 100px; position:relative; overflow:hidden; min-height:600px;">
+
+  <p style="text-align:center; font-family:'Mouse Memoirs',sans-serif; font-size:18px; letter-spacing:0.2em; color:#f91814; text-transform:uppercase; margin-bottom:10px; font-style:italic; text-decoration:underline; text-decoration-color:#f91814; text-underline-offset:4px;">
+    PURE QUALITY
+  </p>
+
+  <div style="text-align:center; margin-bottom:80px; overflow:hidden; padding:0 20px;">
+    <div style="display:inline-block; position:relative;">
+      <h2 style="font-family:'Modak',sans-serif; font-size:clamp(70px,13vw,172px); line-height:0.85; color:#f91814; position:relative;">
+        FULL LOADED
+      </h2>
+      <div style="position:absolute; top:50%; left:-3%; right:-3%; height:clamp(5px,0.9vw,11px); background:#f91814; transform:translateY(-50%) rotate(-2deg);"></div>
+      <div style="position:absolute; top:calc(50% + clamp(8px,1.2vw,16px)); left:-2%; right:-2%; height:clamp(4px,0.7vw,8px); background:#f91814; transform:translateY(-50%) rotate(-2deg); opacity:0.7;"></div>
+    </div>
+  </div>
+
+  <div style="position:relative; max-width:900px; margin:0 auto; height:clamp(220px,32vw,380px);">
+
+    <div class="fa" style="position:absolute; left:2%; top:0; width:clamp(100px,16vw,185px);">
+      <svg viewBox="0 0 185 140" xmlns="http://www.w3.org/2000/svg" style="width:100%; filter:drop-shadow(4px 6px 12px rgba(0,0,0,0.2)); display:block;">
+        <path d="M10 80 Q30 20 92 15 Q154 20 175 80 Q154 120 92 115 Q30 120 10 80Z" fill="#4a8a28"/>
+        <path d="M25 75 Q50 30 92 25 Q134 30 160 75" stroke="#3a7020" stroke-width="3" fill="none"/>
+        <path d="M35 90 Q60 50 92 45 Q124 50 150 90" stroke="#3a7020" stroke-width="2" fill="none"/>
+        <path d="M10 80 Q0 60 15 50 Q18 68 10 80Z" fill="#5aaa38"/>
+        <path d="M175 80 Q185 60 170 50 Q167 68 175 80Z" fill="#5aaa38"/>
+        <path d="M40 20 Q30 5 45 0 Q48 12 40 20Z" fill="#5aaa38"/>
+        <path d="M92 10 Q88 -2 98 -2 Q98 8 92 10Z" fill="#5aaa38"/>
+        <path d="M145 20 Q155 5 150 0 Q148 12 145 20Z" fill="#5aaa38"/>
+      </svg>
+    </div>
+
+    <div class="fb" style="position:absolute; left:36%; top:5%; width:clamp(90px,14vw,165px);">
+      <svg viewBox="0 0 165 165" xmlns="http://www.w3.org/2000/svg" style="width:100%; filter:drop-shadow(4px 6px 12px rgba(0,0,0,0.2)); display:block;">
+        <circle cx="82" cy="90" r="68" fill="#e02810"/>
+        <circle cx="82" cy="90" r="65" fill="#e83820"/>
+        <ellipse cx="60" cy="68" rx="20" ry="14" fill="rgba(255,255,255,0.25)" transform="rotate(-20 60 68)"/>
+        <rect x="79" y="18" width="6" height="20" rx="3" fill="#3a8020"/>
+        <path d="M82 22 Q68 12 62 18 Q70 25 82 22Z" fill="#4a9a28"/>
+        <path d="M82 22 Q96 12 102 18 Q94 25 82 22Z" fill="#4a9a28"/>
+        <path d="M82 22 Q78 8 82 5 Q86 8 82 22Z" fill="#4a9a28"/>
+        <path d="M82 25 Q68 60 66 95" stroke="#c02010" stroke-width="2" fill="none" opacity="0.5"/>
+        <path d="M82 25 Q96 60 98 95" stroke="#c02010" stroke-width="2" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="fc" style="position:absolute; left:58%; top:22%; width:clamp(85px,13vw,155px);">
+      <svg viewBox="0 0 155 120" xmlns="http://www.w3.org/2000/svg" style="width:100%; filter:drop-shadow(4px 6px 12px rgba(0,0,0,0.2)); display:block;">
+        <ellipse cx="80" cy="112" rx="60" ry="8" fill="rgba(0,0,0,0.15)"/>
+        <rect x="10" y="15" width="135" height="90" rx="6" fill="#ffd750"/>
+        <rect x="10" y="15" width="135" height="90" rx="6" fill="none" stroke="#f4a804" stroke-width="3"/>
+        <circle cx="50" cy="55" r="10" fill="#f4a804" opacity="0.6"/>
+        <circle cx="85" cy="38" r="7" fill="#f4a804" opacity="0.6"/>
+        <circle cx="115" cy="65" r="9" fill="#f4a804" opacity="0.6"/>
+        <circle cx="68" cy="78" r="6" fill="#f4a804" opacity="0.5"/>
+        <rect x="10" y="15" width="135" height="12" rx="3" fill="#f4a804" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <div class="fa" style="position:absolute; left:25%; bottom:0; width:clamp(110px,18vw,205px);">
+      <svg viewBox="0 0 205 80" xmlns="http://www.w3.org/2000/svg" style="width:100%; filter:drop-shadow(4px 6px 12px rgba(0,0,0,0.22)); display:block;">
+        <ellipse cx="102" cy="74" rx="88" ry="6" fill="rgba(0,0,0,0.18)"/>
+        <ellipse cx="102" cy="42" rx="94" ry="30" fill="#3a1a08"/>
+        <ellipse cx="102" cy="36" rx="90" ry="24" fill="#4a2210"/>
+        <path d="M50 36 Q60 32 70 36 Q60 40 50 36Z" fill="#2a1006" opacity="0.7"/>
+        <path d="M90 28 Q105 24 118 28 Q105 32 90 28Z" fill="#2a1006" opacity="0.7"/>
+        <path d="M130 36 Q142 32 155 36 Q142 40 130 36Z" fill="#2a1006" opacity="0.7"/>
+        <ellipse cx="102" cy="42" rx="94" ry="30" fill="none" stroke="#5a3018" stroke-width="4"/>
+      </svg>
+    </div>
+
+    <div class="fd" style="position:absolute; right:3%; bottom:10%; width:clamp(14px,2.5vw,32px);">
+      <svg viewBox="0 0 32 120" xmlns="http://www.w3.org/2000/svg" style="width:100%; filter:drop-shadow(2px 3px 5px rgba(0,0,0,0.2)); display:block; transform:rotate(-15deg);">
+        <rect x="12" y="0" width="8" height="80" rx="3" fill="#888"/>
+        <rect x="12" y="0" width="8" height="80" rx="3" fill="url(#chrome)"/>
+        <rect x="8" y="76" width="16" height="6" rx="3" fill="#666"/>
+        <rect x="8" y="80" width="6" height="38" rx="3" fill="#999" transform="rotate(-5 11 80)"/>
+        <rect x="18" y="80" width="6" height="38" rx="3" fill="#999" transform="rotate(5 21 80)"/>
+        <ellipse cx="10" cy="116" rx="4" ry="3" fill="#555" transform="rotate(-5 10 116)"/>
+        <ellipse cx="22" cy="116" rx="4" ry="3" fill="#555" transform="rotate(5 22 116)"/>
+        <defs>
+          <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#aaa"/>
+            <stop offset="50%" stop-color="#eee"/>
+            <stop offset="100%" stop-color="#999"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer style="background:#1b1b1b; color:#f5e3cd; padding:44px 40px 40px; text-align:center;">
+  <div style="font-family:'Modak',sans-serif; font-size:clamp(32px,5vw,64px); color:#f91814; margin-bottom:14px;">CRAV</div>
+  <p style="font-family:'Mouse Memoirs',sans-serif; font-size:13px; letter-spacing:0.12em; opacity:0.5;">
+    © 2024 CRAV BURGER. ALL RIGHTS RESERVED.
+  </p>
+</footer>
+
+</body>
+</html>
